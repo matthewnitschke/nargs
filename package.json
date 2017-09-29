@@ -1,0 +1,14 @@
+{
+  "name": "nargs",
+  "version": "1.0",
+  "description": "Lightweight node js cli argument parser and validator",
+  "author": "Matthew Nitschke <matt@pyrtio.com>",
+  "scripts": {
+   "test": "mocha",
+   "debug-test": "mocha --debug-brk"
+  },
+  "dependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3"
+  }
+}
