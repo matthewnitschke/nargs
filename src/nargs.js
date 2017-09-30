@@ -31,16 +31,29 @@ module.exports = (() => {
           }
         });
 
-        // process prefix args
-        prefixArgs.forEach((arg, i) => {
-          var schemeArg = scheme.prefix[arg.prefix];
+        Object.keys(scheme.prefix).forEach((schemeArgPrefix, i) => {
+          var schemeArg = scheme.prefix[schemeArgPrefix];
+          var foundPrefixArg;
+          prefixArgs.forEach((prefixArg, j) => {
+            if (schemeArgPrefix == prefixArg.prefix) {
+              foundPrefixArg = prefixArg;
+            }
+          });
 
-          if (!arg && arg.defaultValue) {
-            arg = arg.defaultValue;
+          // ensure foundPrefixArg exists
+          if (!foundPrefixArg){
+            if (schemeArg.default) {
+              foundPrefixArg = {
+                prefix: schemeArg.prefix,
+                value: schemeArg.default
+              }
+            } else {
+              throw Error(`Missing argument: ${schemeArg.prefix} ${JSON.stringify(schemeArg)}`);
+            }
           }
 
-          if (isValid(arg, schemeArg)) {
-            returnArgs[schemeArg.name] = schemeArg.type ? schemeArg.type(arg.value) : arg.value;
+          if (isValid(foundPrefixArg, schemeArg)){
+            returnArgs[schemeArg.name] = schemeArg.type ? schemeArg.type(foundPrefixArg.value) : foundPrefixArg.value
           } else {
             throw Error(schemeArg.invalidMessage ? schemeArg.invalidMessage : `Argument ${schemeArg.name} is invalid`);
           }

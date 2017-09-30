@@ -24,7 +24,7 @@ describe('Narg Argument Validator', () =>{
   });
 
   it('prefix args', () => {
-    var args = "-f 1.23 -b=false"
+    var args = "-f 1.23 -b=false -s foo"
 
     var parsedArgs = nargs.parse({
       prefix: {
@@ -40,17 +40,35 @@ describe('Narg Argument Validator', () =>{
           name: "integerValue",
           type: nargs.Integer,
           default: 12
+        },
+        "-s": {
+          name: "stringValue"
         }
       }
-    }, args)
+    }, args);
 
     expect(parsedArgs).to.deep.equal({
       floatValue: 1.23,
       booleanValue: false,
-      integerValue: 12
+      integerValue: 12,
+      stringValue: "foo"
     })
   })
 
+  it('validator', () => {
+
+    var args = "192.168.a.1";
+
+    expect(() => {
+      var parseArgs = nargs.parse({
+        index: [{
+          name: "ip",
+          validator: /^([0-9.]+)$/g,
+          invalidMessage: "IP address not correct format (expted format: xxx.xxx.xxx.xxx)"
+        }]
+      }, args);
+    }).to.throw(Error);
+  })
 })
 
 
