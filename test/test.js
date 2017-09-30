@@ -70,31 +70,3 @@ describe('Narg Argument Validator', () =>{
     }).to.throw(Error);
   })
 })
-
-
-
-
-
-
-// var args = parseArgs({
-//   prefix: {
-//     "-i": {
-//       name: "integerType",
-//       type: Integer,
-//       default: 12
-//     },
-//     "-b": {
-//       name: "booleanType",
-//       type: Boolean
-//     },
-//     "-f": {
-//       name: "floatType",
-//       type: Float
-//     }
-//   },
-//   // index: [{
-//   //   name: "sourceIp",
-//   //   type: String,
-//   //   validator: /([0-9.]+)/g
-//   // }]
-// });
