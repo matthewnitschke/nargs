@@ -1,4 +1,4 @@
-var nargs = require("../src/nargs.js");
+var nargs = require("../src/n-args.js");
 var expect = require("chai").expect;
 
 

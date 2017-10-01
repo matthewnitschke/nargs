@@ -1,6 +1,6 @@
 {
-  "name": "nargs",
-  "version": "1.0",
+  "name": "n-args",
+  "version": "1.0.0",
   "description": "Lightweight node js cli argument parser and validator",
   "author": "Matthew Nitschke <matt@pyrtio.com>",
   "scripts": {
